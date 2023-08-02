@@ -1,0 +1,251 @@
+@font-face {
+    font-family: NexaBold;
+    src: url("/fonts/Nexa Bold.otf");
+}
+
+@font-face {
+    font-family: NexaLight;
+    src: url("/fonts/Nexa Light.otf");
+}
+
+html {
+    font-family: NexaBold, serif;
+}
+
+h1 {
+    font-size: 4.5dvw;
+}
+
+h2 {
+    font-size: 2.5dvw;
+}
+
+h3 {
+    font-size: 2dvw;
+}
+
+h4 {
+    font-size: 1.5dvw;
+}
+
+h5 {
+    font-size: 1.2dvw;
+}
+
+h6 {
+    font-size: 1dvw;
+}
+
+.h7 {
+    font-size: 0.7dvw;
+    margin: 0 5%;
+}
+
+#main-block {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    flex-direction: column;
+    background-image: url("/images/background.svg");
+    background-position: center;
+    background-size: cover;
+}
+
+#weather-block {
+    width: 64%;
+    height: 90dvh;
+    background-image: url("/images/weather-backgrounds/6.jpg");
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    margin: 5dvh 0 0 0;
+}
+
+.left-block {
+    width: 25%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-info-block {
+    width: 90%;
+    height: 25%;
+    margin: 15% 5% 40% 5%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-temperature-block {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.feels-like-temperature-block {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.info-block {
+    width: 90%;
+    height: 15%;
+    border-radius: 10px;
+    margin: 0 5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+}
+
+.weather-icon {
+    width: 20%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather-info-text {
+    width: 80%;
+}
+
+.right-block {
+    width: 70%;
+    height: 100%;
+    border-radius: 0 10px 10px 0;
+    display: flex;
+    align-items: end;
+    justify-content: start;
+    flex-direction: column;
+}
+
+.weather-name-text-block {
+    width: 50%;
+    height: 30%;
+    display: flex;
+    align-items: start;
+    justify-content: right;
+}
+
+#weather-name-text {
+    margin: 0;
+    padding: 5%;
+    text-align: end;
+}
+
+#info-block {
+    width: 64%;
+    height: 5%;
+    display: flex;
+    flex-direction: row;
+    margin: 5px 0 0 0;
+    font-family: NexaLight, serif;
+}
+
+#time-now {
+    width: 48%;
+    color: white;
+    margin: 0 0 0 2%;
+}
+
+#current-location {
+    width: 48%;
+    color: white;
+    text-align: end;
+    margin: 0;
+}
+
+#daily-weather-info {
+    width: 64%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: start;
+    margin: 5dvh 0 0 0;
+}
+
+.margin-block {
+    width: 25%;
+    height: 30dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather-time-temperature-info {
+    width: 90%;
+    height: 20dvh;
+    background-image: url("/images/weather-backgrounds/9.jpg");
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-block-small {
+    width: 45%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-temperature-block-small {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#weather-name-text-small {
+    margin: 0;
+    padding: 5%;
+    text-align: end;
+}
+
+
+.info-block-small {
+    width: 90%;
+    height: 15%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    margin: 2% 5%;
+}
+
+
+.time-info {
+    width: 100%;
+    height: 5dvh;
+    color: white;
+    margin: 1dvh 0;
+    text-align: center;
+    font-family: NexaLight, serif;
+}
+

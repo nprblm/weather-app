@@ -1,10 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>TODO List</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/static/styles/styles.css">
+    <title>Weather</title>
 </head>
 <body>
-<h1>Hello</h1>
+
+<article id="article" th:object="${weather}">
+    <div id="main-block">
+        <div id="weather-block" th:style = "'background-image: url(' + ${image} + ')'">
+            <div class="left-block">
+                <div class="main-info-block">
+                    <div class="main-temperature-block">
+                        <h1 th:text="${weather.getCurrent().getTempC() + '°C'}">
+                            17.5°C
+                        </h1>
+                    </div>
+                    <div class="feels-like-temperature-block">
+                        <h4 th:text="${'Feels like: ' + weather.getCurrent().getFeelslikeC() + '°C'}">
+                            Feels like: 16.5°C
+                        </h4>
+                    </div>
+                </div>
+                <div class="info-block">
+                    <div class="weather-icon">
+                        <img src="/images/weather-icons/wind-icon-black.png" width="60%">
+                    </div>
+                    <h3 class="weather-info-text" th:text="${weather.getCurrent().getWindKph() + ' km/h'}">
+                        10.1 km/h
+                    </h3>
+                </div>
+                <div class="info-block">
+                    <div class="weather-icon">
+                        <img src="/images/weather-icons/water-drops-icon-black.png" width="60%">
+                    </div>
+                    <h3 class="weather-info-text" th:text="${weather.getCurrent().getPrecipMm() + ' mm'}">
+                        0.2 mm
+                    </h3>
+                </div>
+                <div class="info-block">
+                    <div class="weather-icon">
+                        <img src="/images/weather-icons/humidity-icon-black.png" width="60%">
+                    </div>
+                    <h3 class="weather-info-text" th:text="${weather.getCurrent().getHumidity() + ' %'}">
+                        87 %
+                    </h3>
+                </div>
+            </div>
+            <div class="right-block">
+                <div class="weather-name-text-block">
+                    <h2 id="weather-name-text" th:text="${weather.getCurrent().getCondition().getText()}">
+                        Patchy freezing drizzle nearby
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div id="info-block">
+            <h5 id="time-now" th:text="${weather.getLocation().getLocaltime()}">
+                2023-07-30 20:53
+            </h5>
+            <h5 id="current-location" th:text="${weather.getLocation().getName() + ', ' + weather.getLocation().getCountry()}">
+                Lviv, Ukraine
+            </h5>
+        </div>
+        <div id="daily-weather-info">
+            <div class="margin-block">
+                <div class="weather-time-temperature-info">
+                    <div class="left-block-small">
+                        <div class="main-temperature-block-small">
+                            <h6>
+                                17.5°C
+                            </h6>
+
+                        </div>
+                        <div class="info-block-small">
+                            <div class="weather-icon">
+                                <img src="/images/weather-icons/wind-icon-black.png" width="90%">
+                            </div>
+                            <h6 class="h7">
+                                10.1 km/h
+                            </h6>
+                        </div>
+                        <div class="info-block-small">
+                            <div class="weather-icon">
+                                <img src="/images/weather-icons/water-drops-icon-black.png" width="90%">
+                            </div>
+                            <h6 class="h7">
+                                0.2 mm
+                            </h6>
+                        </div>
+                        <div class="info-block-small">
+                            <div class="weather-icon">
+                                <img src="/images/weather-icons/humidity-icon-black.png" width="90%">
+                            </div>
+                            <h6 class="h7">
+                                87 %
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="right-block">
+                        <div class="weather-name-text-block">
+                            <h6 id="weather-name-text-small" class="h7">
+                                Patchy freezing drizzle nearby
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="time-info">
+                    20:53
+                </h5>
+            </div>
+        </div>
+    </div>
+</article>
+
 </body>
 </html>
