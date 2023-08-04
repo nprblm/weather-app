@@ -1,8 +1,8 @@
 package ua.nprblm.weatherapp.service;
 
 import org.springframework.stereotype.Service;
-import ua.nprblm.weatherapp.model.weatherNamePicture.CastWeatherNameToPicture;
-import ua.nprblm.weatherapp.util.WeatherNamePictureParser;
+import ua.nprblm.weatherapp.model.weatherNamePicture.WeatherIconAndName;
+import ua.nprblm.weatherapp.util.WeatherIconNameParser;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,9 +13,9 @@ public class WeatherImageSearchService {
         iconName = iconName
                 .replaceAll("//cdn.weatherapi.com/weather/64x64/(day|night)/", "")
                 .replaceAll(".png", "");
-        List<CastWeatherNameToPicture> list = WeatherNamePictureParser.parse();
+        List<WeatherIconAndName> list = WeatherIconNameParser.parse();
 
-        for(CastWeatherNameToPicture item : list)
+        for(WeatherIconAndName item : list)
         {
             if(item.getIconName().equalsIgnoreCase(iconName))
                 return String.format("/images/weather-backgrounds/%s.jpg",item.getPictureName());

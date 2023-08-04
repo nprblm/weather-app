@@ -21,5 +21,5 @@ public class WeatherResponse {
     private int humidity;
     private String weatherName;
     private String backgroundImageURL;
-    private List<WeatherHourly> weatherHourliesList;
+    private List<WeatherDaily> weatherDailyList;
 }

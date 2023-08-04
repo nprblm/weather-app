@@ -2,8 +2,10 @@ package ua.nprblm.weatherapp.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ua.nprblm.weatherapp.model.response.WeatherDaily;
 import ua.nprblm.weatherapp.model.response.WeatherHourly;
 import ua.nprblm.weatherapp.model.response.WeatherResponse;
+import ua.nprblm.weatherapp.model.weather.Forecastday;
 import ua.nprblm.weatherapp.model.weather.Hour;
 import ua.nprblm.weatherapp.model.weather.Weather;
 
@@ -18,23 +20,28 @@ public class CastWeatherToWeatherResponseService {
     private final WeatherImageSearchService weatherImageSearchService;
 
     public WeatherResponse cast(Weather weather) throws IOException {
-        List<WeatherHourly> hourlyList = new ArrayList<>();
-        int timeNow = Integer.parseInt(weather.getLocation().getLocaltime().split(" ")[1].substring(0, 2));
+        List<WeatherDaily> dailyList = new ArrayList<>();
 
-        for (Hour hourInfo : weather.getForecast().getForecastday().get(0).getHour()) {
-            int time = Integer.parseInt(hourInfo.getTime().split(" ")[1].substring(0, 2));
-            if (time > timeNow) {
-                hourlyList.add(new WeatherHourly(
-                        hourInfo.getTime().split(" ")[1],
-                        hourInfo.getTempC(),
-                        hourInfo.getWindKph(),
-                        hourInfo.getPrecipMm(),
-                        hourInfo.getHumidity(),
-                        hourInfo.getCondition().getText(),
-                        weatherImageSearchService.findImageByWeatherName(hourInfo.getCondition().getIcon())
-                ));
+        for(Forecastday dayInfo : weather.getForecast().getForecastday())
+        {
+            List<WeatherHourly> hourlyList = new ArrayList<>();
+
+            for (Hour hourInfo : dayInfo.getHour()) {
+                if (hourInfo.getTimeEpoch() > weather.getLocation().getLocaltimeEpoch()) {
+                    hourlyList.add(new WeatherHourly(
+                            hourInfo.getTime().split(" ")[1],
+                            hourInfo.getTempC(),
+                            hourInfo.getWindKph(),
+                            hourInfo.getPrecipMm(),
+                            hourInfo.getHumidity(),
+                            hourInfo.getCondition().getText(),
+                            weatherImageSearchService.findImageByWeatherName(hourInfo.getCondition().getIcon())
+                    ));
+                }
             }
+            dailyList.add(new WeatherDaily(dayInfo.getDate().split(" ")[0], hourlyList));
         }
+
 
         return new WeatherResponse(
                 weather.getLocation().getName() + ", " + weather.getLocation().getCountry(),
@@ -46,7 +53,7 @@ public class CastWeatherToWeatherResponseService {
                 weather.getCurrent().getHumidity(),
                 weather.getCurrent().getCondition().getText(),
                 weatherImageSearchService.findImageByWeatherName(weather.getCurrent().getCondition().getIcon()),
-                hourlyList
+                dailyList
         );
     }
 

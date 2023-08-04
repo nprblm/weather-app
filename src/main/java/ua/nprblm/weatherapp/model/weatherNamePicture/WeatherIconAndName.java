@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CastWeatherNameToPicture {
+public class WeatherIconAndName {
     private String iconName;
     private String name;
     private String pictureName;
