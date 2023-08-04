@@ -1,9 +1,14 @@
 package ua.nprblm.weatherapp.config;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import ua.nprblm.weatherapp.WeatherAppApplication;
+import ua.nprblm.weatherapp.util.CastJsonToWeather;
 
 @Configuration
 @EnableWebMvc
@@ -24,6 +29,16 @@ public class MVCConfig implements WebMvcConfigurer {
         registry
                 .addResourceHandler("/fonts/**")
                 .addResourceLocations("classpath:/static/fonts/");
+    }
+
+    @Bean
+    public Log getLog() {
+        return LogFactory.getLog(WeatherAppApplication.class.getName());
+    }
+
+    @Bean
+    public CastJsonToWeather getCastJsonToWeather() {
+        return new CastJsonToWeather(getLog());
     }
 
 }

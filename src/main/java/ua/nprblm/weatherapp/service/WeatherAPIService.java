@@ -1,6 +1,7 @@
 package ua.nprblm.weatherapp.service;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ import java.net.http.HttpResponse;
 @Service
 @RequiredArgsConstructor
 public class WeatherAPIService {
+
+    private final Log log;
 
     @Value("${x.rapid.api.key}")
     private String XRapidAPIKey;
@@ -33,6 +36,7 @@ public class WeatherAPIService {
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
+            log.error(e.getMessage());
             throw new RuntimeException(e);
         }
         return response.body();

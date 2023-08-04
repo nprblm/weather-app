@@ -9,7 +9,6 @@ import ua.nprblm.weatherapp.model.weather.Forecastday;
 import ua.nprblm.weatherapp.model.weather.Hour;
 import ua.nprblm.weatherapp.model.weather.Weather;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class CastWeatherToWeatherResponseService {
 
     private final WeatherImageSearchService weatherImageSearchService;
 
-    public WeatherResponse cast(Weather weather) throws IOException {
+    public WeatherResponse cast(Weather weather) {
         List<WeatherDaily> dailyList = new ArrayList<>();
 
         for(Forecastday dayInfo : weather.getForecast().getForecastday())

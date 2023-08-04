@@ -98,6 +98,15 @@ h6 {
     height: 1rem;
 }
 
+#main-page-text-block{
+    width: 64dvw;
+    height: min(calc(62dvw/1.8), 80dvh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 #weather-block {
     width: 64dvw;
     height: min(calc(64dvw/1.6), 84dvh);
