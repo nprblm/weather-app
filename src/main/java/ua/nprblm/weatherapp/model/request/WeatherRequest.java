@@ -12,6 +12,4 @@ import lombok.Setter;
 public class WeatherRequest {
     private String city;
     private String days;
-
-    // Getters and setters
 }
