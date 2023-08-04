@@ -1,5 +1,7 @@
 package ua.nprblm.weatherapp.controller;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,8 +11,6 @@ import ua.nprblm.weatherapp.model.weather.Weather;
 import ua.nprblm.weatherapp.service.CastWeatherToWeatherResponseService;
 import ua.nprblm.weatherapp.service.WeatherAPIService;
 import ua.nprblm.weatherapp.util.CastJsonToWeather;
-
-import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,14 +26,13 @@ public class HomeController {
     }
 
     @GetMapping("/forecast")
-    public ModelAndView forecast(@RequestParam(name = "city") String city) {
-        Weather weather = castJsonToWeather.cast(weatherService.getWeatherJSON(city
-                .trim()
-                .replaceAll(" ", "_"),
-                "1"));
+    public ModelAndView forecast(@Valid @NotNull @RequestParam(name = "city") String city) {
+        city = city.trim().replaceAll(" ", "_");
+        String weatherJSON = weatherService.getWeatherJSON(city, "1");
+        Weather weather = castJsonToWeather.cast(weatherJSON);
 
         ModelAndView modelAndView = new ModelAndView("forecast");
-        modelAndView.addObject("weather", castService.cast(Objects.requireNonNull(weather)));
+        modelAndView.addObject("weather", castService.cast(weather));
 
         return modelAndView;
     }

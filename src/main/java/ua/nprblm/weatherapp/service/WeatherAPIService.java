@@ -23,8 +23,7 @@ public class WeatherAPIService {
     @Value("${x.rapid.api.host}")
     private String XRapidAPIHost;
 
-    public String getWeatherJSON (String city, String days)
-    {
+    public String getWeatherJSON(String city, String days) {
         String requestString = String.format("https://weatherapi-com.p.rapidapi.com/forecast.json?q=%s&days=%s", city, days);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(requestString))
@@ -39,6 +38,8 @@ public class WeatherAPIService {
             log.error(e.getMessage());
             throw new RuntimeException(e);
         }
+        if (response.body().contains("No matching location found"))
+            return null;
         return response.body();
     }
 }
