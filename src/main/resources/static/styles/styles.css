@@ -48,7 +48,7 @@ h6 {
     min-height: 100dvh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     flex-direction: column;
     background-color: transparent;
 }
@@ -99,8 +99,8 @@ h6 {
 }
 
 #weather-block {
-    width: 64%;
-    height: 86dvh;
+    width: 64dvw;
+    height: min(calc(64dvw/1.6), 84dvh);
     background-image: url("/images/weather-backgrounds/6.jpg");
     background-position: center;
     background-size: cover;
@@ -219,7 +219,7 @@ h6 {
 }
 
 .daily-weather-info {
-    width: 64%;
+    width: 64dvw;
     display: flex;
     flex-wrap: wrap;
     align-items: start;
@@ -228,8 +228,8 @@ h6 {
 }
 
 .margin-block {
-    width: 25%;
-    height: 30dvh;
+    width: 16dvw;
+    height: min(calc(16dvw/1.2), 30dvh);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -237,8 +237,8 @@ h6 {
 }
 
 .weather-time-temperature-info {
-    width: 90%;
-    height: 20dvh;
+    width: 14dvw;
+    height: min(calc(14.5dvw/1.6), 20dvh);
     background-image: url("/images/weather-backgrounds/9.jpg");
     background-position: center;
     background-size: cover;
