@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TODO List</title>
     <link rel="stylesheet" type="text/css" href="/static/styles/normalize.css">
     <link rel="stylesheet" type="text/css" href="/static/styles/styles.css">
     <title>Weather</title>
@@ -11,16 +10,16 @@
 
 <article id="article" th:object="${weather}">
     <div id="main-block">
-        <div id="weather-block" th:style = "'background-image: url(' + ${image} + ')'">
+        <div id="weather-block" th:style = "'background-image: url(' + ${weather.getBackgroundImageURL()} + ')'">
             <div class="left-block">
                 <div class="main-info-block">
                     <div class="main-temperature-block">
-                        <h1 th:text="${weather.getCurrent().getTempC() + '°C'}">
+                        <h1 th:text="${weather.getTemperatureC() + '°C'}">
                             17.5°C
                         </h1>
                     </div>
                     <div class="feels-like-temperature-block">
-                        <h4 th:text="${'Feels like: ' + weather.getCurrent().getFeelslikeC() + '°C'}">
+                        <h4 th:text="${'Feels like: ' + weather.getFeelsLikeC() + '°C'}">
                             Feels like: 16.5°C
                         </h4>
                     </div>
@@ -29,7 +28,7 @@
                     <div class="weather-icon">
                         <img src="/images/weather-icons/wind-icon-black.png" width="60%">
                     </div>
-                    <h3 class="weather-info-text" th:text="${weather.getCurrent().getWindKph() + ' km/h'}">
+                    <h3 class="weather-info-text" th:text="${weather.getWindSpeed() + ' km/h'}">
                         10.1 km/h
                     </h3>
                 </div>
@@ -37,7 +36,7 @@
                     <div class="weather-icon">
                         <img src="/images/weather-icons/water-drops-icon-black.png" width="60%">
                     </div>
-                    <h3 class="weather-info-text" th:text="${weather.getCurrent().getPrecipMm() + ' mm'}">
+                    <h3 class="weather-info-text" th:text="${weather.getPrecipitation() + ' mm'}">
                         0.2 mm
                     </h3>
                 </div>
@@ -45,33 +44,33 @@
                     <div class="weather-icon">
                         <img src="/images/weather-icons/humidity-icon-black.png" width="60%">
                     </div>
-                    <h3 class="weather-info-text" th:text="${weather.getCurrent().getHumidity() + ' %'}">
+                    <h3 class="weather-info-text" th:text="${weather.getHumidity() + ' %'}">
                         87 %
                     </h3>
                 </div>
             </div>
             <div class="right-block">
                 <div class="weather-name-text-block">
-                    <h2 id="weather-name-text" th:text="${weather.getCurrent().getCondition().getText()}">
+                    <h2 id="weather-name-text" th:text="${weather.getWeatherName()}">
                         Patchy freezing drizzle nearby
                     </h2>
                 </div>
             </div>
         </div>
         <div id="info-block">
-            <h5 id="time-now" th:text="${weather.getLocation().getLocaltime()}">
+            <h5 id="time-now" th:text="${weather.getDatetime()}">
                 2023-07-30 20:53
             </h5>
-            <h5 id="current-location" th:text="${weather.getLocation().getName() + ', ' + weather.getLocation().getCountry()}">
+            <h5 id="current-location" th:text="${weather.getLocation()}">
                 Lviv, Ukraine
             </h5>
         </div>
         <div id="daily-weather-info">
-            <div class="margin-block">
-                <div class="weather-time-temperature-info">
+            <div class="margin-block" th:each="weatherItem : ${weather.getWeatherHourliesList()}">
+                <div class="weather-time-temperature-info" th:style = "'background-image: url(' + ${weatherItem.getBackgroundImageURL()} + ')'">
                     <div class="left-block-small">
                         <div class="main-temperature-block-small">
-                            <h6>
+                            <h6 th:text="${weatherItem.getTemperatureC() + '°C'}">
                                 17.5°C
                             </h6>
 
@@ -80,7 +79,7 @@
                             <div class="weather-icon">
                                 <img src="/images/weather-icons/wind-icon-black.png" width="90%">
                             </div>
-                            <h6 class="h7">
+                            <h6 class="h7" th:text="${weatherItem.getWindSpeed() + ' km/h'}">
                                 10.1 km/h
                             </h6>
                         </div>
@@ -88,7 +87,7 @@
                             <div class="weather-icon">
                                 <img src="/images/weather-icons/water-drops-icon-black.png" width="90%">
                             </div>
-                            <h6 class="h7">
+                            <h6 class="h7" th:text="${weatherItem.getPrecipitation() + ' mm'}">
                                 0.2 mm
                             </h6>
                         </div>
@@ -96,26 +95,48 @@
                             <div class="weather-icon">
                                 <img src="/images/weather-icons/humidity-icon-black.png" width="90%">
                             </div>
-                            <h6 class="h7">
+                            <h6 class="h7" th:text="${weatherItem.getHumidity() + ' %'}">
                                 87 %
                             </h6>
                         </div>
                     </div>
                     <div class="right-block">
                         <div class="weather-name-text-block">
-                            <h6 id="weather-name-text-small" class="h7">
+                            <h6 id="weather-name-text-small" class="h7" th:text="${weatherItem.getWeatherName()}">
                                 Patchy freezing drizzle nearby
                             </h6>
                         </div>
                     </div>
                 </div>
-                <h5 class="time-info">
+                <h5 class="time-info" th:text="${weatherItem.getTime()}">
                     20:53
                 </h5>
             </div>
         </div>
     </div>
 </article>
+
+<footer>
+    <div class="footer-icons-main">
+        <div id="footer-items">
+            <a href="https://t.me/vitalik_bella">
+                <img class="footer-img" id="tg" src="/images/social-media-icons/telegram-white-icon.png">
+
+            </a>
+            <a href="https://github.com/nprblm">
+                <img class="footer-img" id="git" src="/images/social-media-icons/github-white-icon.png">
+
+            </a>
+            <a href="https://www.linkedin.com/in/vitalii-bella-526849230/">
+                <img class="footer-img" id="li" src="/images/social-media-icons/linkedin-white-icon.png">
+
+            </a>
+        </div>
+    </div>
+    <div class="footer-text">
+        <h1 id="footer-bottom-text">©Weather Forecast 2023</h1>
+    </div>
+</footer>
 
 </body>
 </html>
