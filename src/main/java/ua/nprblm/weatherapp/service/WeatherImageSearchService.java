@@ -5,14 +5,12 @@ import org.springframework.stereotype.Service;
 import ua.nprblm.weatherapp.model.weatherNamePicture.WeatherIconAndName;
 import ua.nprblm.weatherapp.service.dao.WeatherIconsService;
 
-import java.io.IOException;
-
 @Service
 @RequiredArgsConstructor
 public class WeatherImageSearchService {
     private final WeatherIconsService service;
 
-    public String findImageByWeatherName(String iconName) throws IOException {
+    public String findImageByWeatherName(String iconName) {
         iconName = iconName
                 .replaceAll("//cdn.weatherapi.com/weather/64x64/(day|night)/", "")
                 .replaceAll(".png", "");
