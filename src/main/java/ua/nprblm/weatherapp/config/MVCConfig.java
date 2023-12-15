@@ -29,6 +29,9 @@ public class MVCConfig implements WebMvcConfigurer {
         registry
                 .addResourceHandler("/fonts/**")
                 .addResourceLocations("classpath:/static/fonts/");
+        registry
+                .addResourceHandler("/textolite/**")
+                .addResourceLocations("classpath:/static/textolite/");
     }
 
     @Bean
