@@ -29,6 +29,10 @@ public class HomeController {
     @GetMapping("/forecast")
     public ModelAndView forecast(@Valid @NotNull @RequestParam(name = "city") String city) {
         String weatherJSON = weatherService.getWeatherJSON(CityNameNormalizer.normalize(city), "1");
+        if(weatherJSON == null)
+        {
+            return new ModelAndView("error-page");
+        }
         Weather weather = castJsonToWeather.cast(weatherJSON);
 
         ModelAndView modelAndView = new ModelAndView("forecast");
